@@ -1,0 +1,9 @@
+#mon_playbook
+---
+- name: Mon premier playbook
+  hosts: servers
+  remote_user: centos
+  connection: ssh
+  tasks:
+    - name: Ping the system
+      ansible.builtin.ping:
