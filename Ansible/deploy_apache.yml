@@ -1,0 +1,24 @@
+# deploy_apache.yml
+---
+- name: Déployer un serveur Web Apache
+  hosts: servers
+  remote_user: centos
+  become: yes  # Utilise sudo pour exécuter les tâches avec des privilèges élevés
+  tasks:
+    - name: Installer Apache
+      ansible.builtin.yum:
+        name: httpd  # Nom du paquet Apache sur CentOS/RHEL
+        state: present
+
+    - name: Démarrer le service Apache
+      ansible.builtin.systemd:
+        name: httpd
+        state: started
+        enabled: yes  # Active le service au démarrage
+
+    - name: Vérifier que le service Apache est en cours d'exécution
+      ansible.builtin.service_facts:
+      
+    - name: Afficher l'état du service Apache
+      debug:
+        msg: "Le service Apache est en cours d'exécution : {{ ansible_facts.services['httpd.service'] is defined and ansible_facts.services['httpd.service'].state == 'running' }}"
