@@ -1,0 +1,4 @@
+# Ce dockerfile Construit une Debian12
+FROM debian:12
+
+RUN apt-get update -yq && apt-get install -yq nginx
