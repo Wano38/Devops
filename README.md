@@ -10,7 +10,7 @@ Bienvenue dans le dépôt GitHub dédié aux cours de l'École Supérieure de G�
 
 ## Description
 
-Ce dépôt sert de plateforme collaborative pour les étudiants de l'ESGI. Il contient :
+Ce dépôt sert de plateforme collaborative à envoyer au prof pour vérifier mon Travail :
 
 - Des notes de cours
 - Des exercices et leurs solutions
