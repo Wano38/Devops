@@ -6,9 +6,7 @@ Bienvenue dans le dépôt GitHub dédié aux cours de l'École Supérieure de G�
 
 - [Description](#description)
 - [Installation](#installation)
-- [Utilisation](#utilisation)
-- [Contributions](#contributions)
-- [Licence](#licence)
+
 
 ## Description
 
