@@ -1,0 +1,13 @@
+apiVersion: v1 # Version de l'APIServer k8s
+kind: Service # Le type de ressource à gérer : Pod, Deployment, Service, ...
+metadata: # Métadatas de la ressource
+  name: my-clusterip-service # nom (interne) de la ressource à créer et/ou monitorer
+  labels: # Correction : ajout d'un espace
+    app: my-app
+spec:
+  type: ClusterIP
+  selector:
+    app: my-app
+  ports:
+    - port: 80 # Port interne exposé par le service
+      targetPort: 8080 # Port interne sur lequel le conteneur écoute

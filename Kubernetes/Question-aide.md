@@ -54,11 +54,15 @@ kubectl apply -f monFichier.yml
 
 1. En utilisant la ligne de commande kubectl, exposer un port du pod nginx
    ```bash
-   kubectl port-forward MON_POD PORT_HOST:PORT_CONTAINER
+   kubectl port-forward web 8080:80 &
    ```
 2. Modifier le pod web pour lui ajouter un label : app=web-app. Ce label permettre de
 lier le Pod aux Services.
-1. Créer un service de type ClusterIP pour exposer nginx dans le cluster. Tester la
+```bash
+kubectl label pods web app=web-app
+```
+3. Créer un service de type ClusterIP pour exposer nginx dans le cluster. Tester la
 connexion depuis un 2e Pod.
-1. Créer un service de type NodePort. Tester l’accès à nginx depuis la machine hôte
+
+4. Créer un service de type NodePort. Tester l’accès à nginx depuis la machine hôte
 sur le port choisi.
