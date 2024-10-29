@@ -1,0 +1,13 @@
+apiVersion: v1  # Version de l'APIServer k8s
+kind: Pod  # Le type de ressource à gérer : Pod, Deployment, Service, ...
+metadata:  # Métadatas de la ressource
+  name: test  # nom (interne) de la ressource à créer et/ou monitorer
+spec:  # Les spécifications de la ressource. Différent pour chaque type de ressource
+  containers:
+    - name: front-end  # nom du conteneur
+      image: alpine  # image Docker
+      command:  # Commande à exécuter dans le conteneur
+        - sleep
+        - "9999"
+      ports:  # Définition des ports exposés par le conteneur
+        - containerPort: 80  # port dans le contene
