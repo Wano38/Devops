@@ -1,0 +1,32 @@
+# docker-compose.yml
+version: '3.3'
+
+services:
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'db'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - '3306:3306'
+    volumes:
+      - my-db:/var/lib/mysql
+
+  wordpress:
+    image: wordpress:latest
+    restart: always
+    depends_on:
+      - db  # Indique que WordPress dépend de MySQL
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: 'user'
+      WORDPRESS_DB_PASSWORD: 'password'
+      WORDPRESS_DB_NAME: 'db'  # Correction de la variable d'environnement
+    ports:
+      - '8080:80'  # Le port 80 du conteneur est mappé au port 8080 de l'hôte
+
+volumes:
+  my-db:
