@@ -28,8 +28,8 @@ metadata:
 spec:
   selector:
     app: elasticsearch
-  type: NodePort  
+  type: NodePort  # Expose Elasticsearch as a NodePort service
   ports:
   - port: 9200
     targetPort: 9200
-    nodePort: 30000  
+    nodePort: 30000  # Optionnel : définissez un port spécifique si souhaité

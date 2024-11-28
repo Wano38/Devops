@@ -28,8 +28,8 @@ metadata:
 spec:
   selector:
     app: kibana
-  type: NodePort  
+  type: NodePort  # Définir le type ici pour exposer Kibana
   ports:
   - port: 5601
     targetPort: 5601
-    nodePort: 30001  
+    nodePort: 30001  # Port spécifique pour Minikube (facultatif)

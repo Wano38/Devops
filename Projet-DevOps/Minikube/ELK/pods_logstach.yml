@@ -3,10 +3,10 @@ kind: Deployment
 metadata:
   name: logstash
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: logstash
-  replicas: 1
   template:
     metadata:
       labels:
@@ -14,24 +14,36 @@ spec:
     spec:
       containers:
       - name: logstash
-        image: docker.elastic.co/logstash/logstash:7.9.2
+        image: docker.elastic.co/logstash/logstash:8.3.0
+        env:
+          - name: ELASTICSEARCH_HOST
+            value: "elasticsearch"  # Nom du service Elasticsearch
+          - name: ELASTICSEARCH_PORT
+            value: "9200"  # Port par défaut d'Elasticsearch
+          - name: ELASTICSEARCH_USER
+            value: "elastic"  # Utilisateur pour se connecter à Elasticsearch
+          - name: ELASTICSEARCH_PASSWORD
+            value: "toto"  # Remplacez par le mot de passe réel
         ports:
-        - containerPort: 5044
-        volumeMounts:
-        - name: config-volume
-          mountPath: /usr/share/logstash/pipeline/
-      volumes:
-      - name: config-volume
-        configMap:
-          name: logstash-config
+          - containerPort: 5044  # Port par défaut pour l'entrée Beats
+          - containerPort: 9600  # Port pour l'API de monitoring de Logstash
+        args: ["-f", "/usr/share/logstash/pipeline/logstash.conf"]  # Spécifiez le chemin du fichier de configuration de Logstash
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: logstash
 spec:
+  type: NodePort  # ou ClusterIP selon vos besoins
+  ports:
+    - name: beats  # Nom du port pour le port 5044
+      port: 5044
+      targetPort: 5044
+      protocol: TCP
+    - name: monitoring  # Nom du port pour le port 9600
+      port: 9600
+      targetPort: 9600
+      protocol: TCP
   selector:
     app: logstash
-  ports:
-  - port: 5044
-    targetPort: 5044

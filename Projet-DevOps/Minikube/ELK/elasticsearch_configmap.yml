@@ -7,3 +7,5 @@ data:
     cluster.name: "docker-cluster"
     network.host: 0.0.0.0
     discovery.type: single-node
+    xpack.security.enabled: true
+    xpack.security.transport.ssl.enabled: false

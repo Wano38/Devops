@@ -7,3 +7,6 @@ data:
     server.port: 5601
     server.host: "0.0.0.0"
     elasticsearch.hosts: ["http://elasticsearch:9200"]
+    elasticsearch.username: "kibana_system"
+    elasticsearch.password: "toto"  # Remplacez par le mot de passe réel
+    xpack.security.enabled: true
